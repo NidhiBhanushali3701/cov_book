@@ -8,7 +8,7 @@ class StartApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.teal,
         title: Center(
           child: Text("CoV Book"),
         ),
@@ -16,40 +16,43 @@ class StartApp extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(top: 100.0),
-        child: Expanded(
-          child: Container(
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    height: 50,
-                    width: 250,
-                    child: MaterialButton(
-                      onPressed: () {
-                        print("find by pincode");
-                        Navigator.pushNamed(context, PinCodeScreen.id);
-                      },
-                      color: Colors.blueGrey,
-                      child: Text("Find By Pin-Code"),
-                    ),
+        child: Container(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 48,
+                  width: 237,
+                  decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(21),),
+                  child: TextButton(
+                    onPressed: () {
+                      print("find by pincode");
+                      Navigator.pushNamed(context, PinCodeScreen.id);
+                    },
+                    child: Text("Find By Pin-Code",style: TextStyle(color: Colors.white, fontSize: 25),),
                   ),
-                  SizedBox(
-                    height: 30,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  height: 48,
+                  width: 237,
+                  decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(21),),
+                  child: TextButton(
+                    onPressed: () {
+                      print("find by district");
+                      Navigator.pushNamed(context, DistrictScreen.id);
+                    },
+                    child: Text("Find By District",style: TextStyle(color: Colors.white, fontSize: 25),),
                   ),
-                  Container(
-                    height: 50,
-                    width: 250,
-                    child: MaterialButton(
-                      onPressed: () {
-                        print("find by district");
-                        Navigator.pushNamed(context, DistrictScreen.id);
-                      },
-                      color: Colors.blueGrey,
-                      child: Text("Find By District"),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
