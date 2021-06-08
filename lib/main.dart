@@ -8,7 +8,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: StartApp.id,
       routes: {
         StartApp.id: (context) {
           return StartApp();

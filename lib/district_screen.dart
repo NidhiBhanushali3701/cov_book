@@ -11,12 +11,21 @@ class _DistrictScreenState extends State<DistrictScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
         title: Center(
           child: Text("CoV Book"),
         ),
       ),
       body: Container(
-        child: Text("District"),
+        child: Column(
+          children: [
+            TextField(),
+            SizedBox(
+              height: 30,
+            ),
+            MaterialButton(onPressed: (){}),
+          ],
+        ),
       ),
     );
   }
