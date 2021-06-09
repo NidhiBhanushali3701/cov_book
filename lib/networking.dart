@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as Http;
+import 'dart:convert';
+
+const String apiURL =
+    "https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/";
+
+class Networking {
+  var decodeData;
+
+  Future<dynamic> getDataByPincode(String pincode, String date) async {
+    Http.Response response = await Http.get(
+        "${apiURL}findByPin?pincode=$pincode&date=$date"); //date=31-03-2021
+
+    if (response.statusCode == 200) {
+      decodeData = jsonDecode(response.body);
+      return decodeData;
+    } else {
+      print("Error!");
+    }
+  }
+
+  Future<dynamic> getDataByDistrict(String districtID, String date) async {
+    Http.Response response = await Http.get(
+        "${apiURL}findByDistrict?district_id=$districtID&date=$date"); //date=31-03-2021
+    if (response.statusCode == 200) {
+      decodeData = jsonDecode(response.body);
+      return decodeData;
+    } else {
+      print("Error!");
+    }
+  }
+
+  Future<dynamic> getDataByLocation(String lat, String lon) async {
+    Http.Response response =
+        await Http.get("$apiURL/findByLatLong?lat=$lat&long=$lon");
+    if (response.statusCode == 200) {
+      decodeData = jsonDecode(response.body);
+      print(decodeData);
+    } else {
+      print("Error");
+    }
+  }
+}
