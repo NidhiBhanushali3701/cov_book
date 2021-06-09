@@ -1,3 +1,4 @@
+import 'package:cov_book/center_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'networking.dart';
 
@@ -9,7 +10,6 @@ class DistrictScreen extends StatefulWidget {
 
 class _DistrictScreenState extends State<DistrictScreen> {
   String districtID;
-  String date = "09-06-2021";
   var dataUsingDistrict;
   var listOfCenters;
 
@@ -59,7 +59,7 @@ class _DistrictScreenState extends State<DistrictScreen> {
                   onPressed: () async {
                     Networking networking = Networking();
                     dataUsingDistrict =
-                        await networking.getDataByDistrict(districtID, date);
+                        await networking.getDataByDistrict(districtID);
                     listOfCenters = dataUsingDistrict["sessions"];
                     print(listOfCenters);
                     print(listOfCenters.length);
@@ -69,6 +69,7 @@ class _DistrictScreenState extends State<DistrictScreen> {
                       print(
                           "${listOfCenter["name"]} gives ${listOfCenter["vaccine"]}");
                     }
+                    Navigator.pushNamed(context, CenterListScreen.id,arguments: {'ListOfCenters':listOfCenters});
                   },
                   child: Text(
                     "SEARCH",

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'district_screen.dart';
 import 'pincode_screen.dart';
 import 'start_screen.dart';
+import 'center_list_screen.dart';
 
 void main() {
   runApp(
@@ -19,6 +20,9 @@ void main() {
         DistrictScreen.id: (context) {
           return DistrictScreen();
         },
+        CenterListScreen.id: (context) {
+          return CenterListScreen();
+        }
       },
     ),
   );

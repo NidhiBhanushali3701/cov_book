@@ -8,8 +8,14 @@ const String apiURL =
 
 class Networking {
   var decodeData;
+  var dateTime = DateTime.now();
+  static String date;
+  void getDate() {
+    date = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+  }
 
-  Future<dynamic> getDataByPincode(String pincode, String date) async {
+  Future<dynamic> getDataByPincode(String pincode) async {
+    getDate();
     Http.Response response = await Http.get(
         "${apiURL}findByPin?pincode=$pincode&date=$date"); //date=31-03-2021
 
@@ -21,7 +27,8 @@ class Networking {
     }
   }
 
-  Future<dynamic> getDataByDistrict(String districtID, String date) async {
+  Future<dynamic> getDataByDistrict(String districtID) async {
+    getDate();
     Http.Response response = await Http.get(
         "${apiURL}findByDistrict?district_id=$districtID&date=$date"); //date=31-03-2021
     if (response.statusCode == 200) {
@@ -33,6 +40,7 @@ class Networking {
   }
 
   Future<dynamic> getDataByLocation(String lat, String lon) async {
+    getDate();
     Http.Response response =
         await Http.get("$apiURL/findByLatLong?lat=$lat&long=$lon");
     if (response.statusCode == 200) {

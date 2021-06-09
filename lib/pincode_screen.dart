@@ -1,3 +1,4 @@
+import 'package:cov_book/center_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'networking.dart';
 
@@ -9,7 +10,6 @@ class PinCodeScreen extends StatefulWidget {
 
 class _PinCodeScreenState extends State<PinCodeScreen> {
   String pincode;
-  String date = "09-06-2021";
   var dataUsingPincode;
   var listOfCenters;
 
@@ -70,17 +70,18 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                     onPressed: () async {
                       Networking networking = Networking();
                       dataUsingPincode =
-                          await networking.getDataByPincode(pincode, date);
+                          await networking.getDataByPincode(pincode);
                       var noOfCenter = 0;
                       print(dataUsingPincode);
-                      print(dataUsingPincode["sessions"] == []);
                       listOfCenters = dataUsingPincode["sessions"];
                       var listOfCenter;
-                      for (listOfCenter in listOfCenters ) {
+                      for (listOfCenter in listOfCenters) {
                         print(++noOfCenter);
                         print(
                             "${listOfCenter["name"]} gives ${listOfCenter["vaccine"]}");
                       }
+                      Navigator.pushNamed(context, CenterListScreen.id,
+                          arguments: {'ListOfCenters': listOfCenters});
                     }),
               ),
             ],
