@@ -8,9 +8,10 @@ const String apiURL =
 
 class Networking {
   var decodeData;
-  var dateTime = DateTime.now();
   static String date;
+
   void getDate() {
+    var dateTime = DateTime.now();
     date = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
   }
 

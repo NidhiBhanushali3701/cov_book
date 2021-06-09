@@ -22,7 +22,7 @@ void main() {
         },
         CenterListScreen.id: (context) {
           return CenterListScreen();
-        }
+        },
       },
     ),
   );

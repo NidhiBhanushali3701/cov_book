@@ -18,9 +18,10 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
-        title: Center(
-          child: Text("CoV Book"),
+        title: Text(
+          "CoV Book",
         ),
+        centerTitle: true,
       ),
       body: Container(
         child: Form(
@@ -36,7 +37,8 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                         borderSide: BorderSide(color: Colors.teal),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.teal)),
+                        borderSide: BorderSide(color: Colors.teal),
+                      ),
                       labelText: 'PIN-CODE',
                       labelStyle: TextStyle(color: Colors.teal),
                       hintText: 'Enter a PinCode'),
@@ -74,14 +76,11 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                       var noOfCenter = 0;
                       print(dataUsingPincode);
                       listOfCenters = dataUsingPincode["sessions"];
-                      var listOfCenter;
-                      for (listOfCenter in listOfCenters) {
-                        print(++noOfCenter);
-                        print(
-                            "${listOfCenter["name"]} gives ${listOfCenter["vaccine"]}");
-                      }
-                      Navigator.pushNamed(context, CenterListScreen.id,
-                          arguments: {'ListOfCenters': listOfCenters});
+                      Navigator.pushNamed(
+                        context,
+                        CenterListScreen.id,
+                        arguments: {'ListOfCenters': listOfCenters},
+                      );
                     }),
               ),
             ],

@@ -17,10 +17,11 @@ class _DistrictScreenState extends State<DistrictScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
-        title: Center(
-          child: Text("CoV Book"),
+        backgroundColor: Colors.teal,
+        title: Text(
+          "CoV Book",
         ),
+        centerTitle: true,
       ),
       body: Container(
         child: Form(
@@ -36,7 +37,8 @@ class _DistrictScreenState extends State<DistrictScreen> {
                         borderSide: BorderSide(color: Colors.teal),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.teal)),
+                        borderSide: BorderSide(color: Colors.teal),
+                      ),
                       labelText: 'DISTRICT-CODE',
                       labelStyle: TextStyle(color: Colors.teal),
                       hintText: 'Enter a District Code'),
@@ -62,14 +64,11 @@ class _DistrictScreenState extends State<DistrictScreen> {
                         await networking.getDataByDistrict(districtID);
                     listOfCenters = dataUsingDistrict["sessions"];
                     print(listOfCenters);
-                    print(listOfCenters.length);
-                    var listOfCenter;
-                    var noOfCenter = 0;
-                    for (listOfCenter in listOfCenters) {
-                      print(
-                          "${listOfCenter["name"]} gives ${listOfCenter["vaccine"]}");
-                    }
-                    Navigator.pushNamed(context, CenterListScreen.id,arguments: {'ListOfCenters':listOfCenters});
+                    Navigator.pushNamed(
+                      context,
+                      CenterListScreen.id,
+                      arguments: {'ListOfCenters': listOfCenters},
+                    );
                   },
                   child: Text(
                     "SEARCH",

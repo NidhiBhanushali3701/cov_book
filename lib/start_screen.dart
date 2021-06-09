@@ -15,7 +15,8 @@ class StartApp extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.only(left: 30,right: 30,bottom: 100,top: 50),
+        padding:
+            const EdgeInsets.only(left: 30, right: 30, bottom: 100, top: 50),
         child: Container(
           child: Center(
             child: Column(
