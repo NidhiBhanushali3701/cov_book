@@ -1,9 +1,89 @@
 import 'package:flutter/material.dart';
 import 'pincode_screen.dart';
 import 'district_screen.dart';
+import 'networking.dart';
 
-class StartApp extends StatelessWidget {
-  static String id = 'StartApp';
+class StartApp extends StatefulWidget {
+  static String id = "StartAppScreen";
+  @override
+  _StartAppState createState() => _StartAppState();
+}
+
+class _StartAppState extends State<StartApp> {
+  List<DropdownMenuItem> states = List<DropdownMenuItem>();
+  List<DropdownMenuItem> districts = List<DropdownMenuItem>();
+  var selectedState = 0, selectedDistrict = 0;
+
+  Future<dynamic> getStates() async {
+    Networking networking = Networking();
+    var decodeData = await networking.getStates();
+    var listOfStates = decodeData["states"];
+    /*states.add(
+      DropdownMenuItem(
+        child: Text("Select A State"),
+        value: 0,
+      ),
+    );*/
+    var state;
+    for (state in listOfStates) {
+      print(state);
+      states.add(
+        DropdownMenuItem(
+          child: Text(state["state_name"]),
+          value: state["state_id"],
+        ),
+      );
+    }
+    return;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    /*
+    print("states \n$states");
+    print("districts \n$districts");
+     */
+    states.insert(
+      0,
+      DropdownMenuItem(
+        child: Text("Select A State"),
+        value: 0,
+      ),
+    );
+    districts.insert(
+      0,
+      DropdownMenuItem(
+        child: Text("Select A District"),
+        value: 0,
+      ),
+    );
+  }
+
+  Future<dynamic> getDistricts() async {
+    await getStates();
+    Networking networking = Networking();
+    selectedDistrict = 21;
+    var decodeData = await networking.getDistricts(selectedDistrict.toString());
+    var listOfDistricts = decodeData["districts"];
+    /*districts.add(
+      DropdownMenuItem(
+        child: Text("Select A District"),
+        value: 0,
+      ),
+    );*/
+    var district;
+    for (district in listOfDistricts) {
+      districts.add(
+        DropdownMenuItem(
+          child: Text(district["district_name"]),
+          value: district["district_id"],
+        ),
+      );
+    }
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,9 +158,17 @@ class StartApp extends StatelessWidget {
                       borderRadius: BorderRadius.circular(21),
                     ),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         print("find by district");
-                        Navigator.pushNamed(context, DistrictScreen.id);
+                        await getDistricts();
+                        Navigator.pushNamed(
+                          context,
+                          DistrictScreen.id,
+                          arguments: {
+                            "states": states,
+                            "districts": districts,
+                          },
+                        );
                       },
                       child: Text(
                         "Find By District",
