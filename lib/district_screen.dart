@@ -9,11 +9,10 @@ class DistrictScreen extends StatefulWidget {
 }
 
 class _DistrictScreenState extends State<DistrictScreen> {
-  String districtID;
   var dataUsingDistrict;
   var listOfCenters, listOfStates, listOfDistricts;
   var selectedState, selectedDistrict;
-  List<DropdownMenuItem> states, districts = List<DropdownMenuItem>();
+  List<DropdownMenuItem> states, districts = [];
 
   @override
   void initState() {
@@ -21,13 +20,6 @@ class _DistrictScreenState extends State<DistrictScreen> {
     print("states \n$states");
     print("districts \n$districts");
     selectedDistrict = selectedState = 0;
-    districts.insert(
-      0,
-      DropdownMenuItem(
-        child: Text("Select A District"),
-        value: 0,
-      ),
-    );
   }
 
   Future<dynamic> getDistricts(var districtSelected) async {
@@ -60,118 +52,111 @@ class _DistrictScreenState extends State<DistrictScreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        child: Form(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(30),
-                child: TextField(
-                  textAlign: TextAlign.justify,
-                  // ignore: missing_return
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.teal),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.teal),
-                      ),
-                      labelText: 'DISTRICT-CODE',
-                      labelStyle: TextStyle(color: Colors.teal),
-                      hintText: 'Enter a District Code'),
-                  onChanged: (value) {
-                    districtID = value;
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Center(
-                              child: DropdownButton(
-                                value: selectedState,
-                                items: arguments["states"],
-                                onChanged: (value) {
-                                  //async {
-                                  setState(() {
-                                    selectedState = value;
-                                  });
-                                  //await getDistricts(selectedState);
-                                  getDistricts(selectedState);
-                                },
+      body: SafeArea(
+        child: Container(
+          child: Form(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Center(
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    value: selectedState,
+                                    hint: Text("Select a State"),
+                                    items: arguments["states"],
+                                    onChanged: (value) {
+                                      //async {
+                                      setState(() {
+                                        selectedState = value;
+                                      });
+                                      //await getDistricts(selectedState);
+                                      districts.insert(
+                                        0,
+                                        DropdownMenuItem(
+                                          child: Text("Select a District"),
+                                          value: 0,
+                                        ),
+                                      );
+                                      getDistricts(selectedState);
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(3.0),
-                            child: Center(
-                              child: DropdownButton(
-                                value: selectedDistrict,
-                                items: arguments["districts"],
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedDistrict = value;
-                                  });
-                                },
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(3.0),
+                                child: Center(
+                                  child: DropdownButtonFormField(
+                                    value: selectedDistrict,
+                                    hint: Text("Select a District"),
+                                    items: arguments["districts"],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedDistrict = value;
+                                      });
+                                    },
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Container(
-                height: 48,
-                width: 237,
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.circular(21),
+                SizedBox(
+                  height: 15,
                 ),
-                child: TextButton(
-                  onPressed: () async {
-                    if (selectedState != 0 && selectedDistrict != 0) {
-                      Networking networking = Networking();
-                      dataUsingDistrict =
-                          await networking.getDataByDistrict(districtID);
-                      listOfCenters = dataUsingDistrict["sessions"];
-                      print(listOfCenters);
-                      Navigator.pushNamed(
-                        context,
-                        CenterListScreen.id,
-                        arguments: {'ListOfCenters': listOfCenters},
-                      );
-                    } else {
-                      print("Select valid state & district");
-                    }
-                  },
-                  child: Text(
-                    "SEARCH",
-                    style: TextStyle(color: Colors.white, fontSize: 25),
+                Container(
+                  height: 48,
+                  width: 237,
+                  decoration: BoxDecoration(
+                    color: Colors.teal,
+                    borderRadius: BorderRadius.circular(21),
+                  ),
+                  child: TextButton(
+                    onPressed: () async {
+                      if (selectedState != 0 && selectedDistrict != 0) {
+                        Networking networking = Networking();
+                        dataUsingDistrict =
+                            await networking.getDataByDistrict(selectedDistrict);
+                        listOfCenters = dataUsingDistrict["sessions"];
+                        print(listOfCenters);
+                        Navigator.pushNamed(
+                          context,
+                          CenterListScreen.id,
+                          arguments: {'ListOfCenters': listOfCenters},
+                        );
+                      } else {
+                        print("Select valid state & district");
+                      }
+                    },
+                    child: Text(
+                      "SEARCH",
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

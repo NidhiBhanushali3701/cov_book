@@ -10,7 +10,7 @@ class StartApp extends StatefulWidget {
 }
 
 class _StartAppState extends State<StartApp> {
-  List<DropdownMenuItem> states = List<DropdownMenuItem>();
+  List<DropdownMenuItem> states = [];
 
   Future<dynamic> getStates() async {
     Networking networking = Networking();
@@ -35,10 +35,11 @@ class _StartAppState extends State<StartApp> {
     states.insert(
       0,
       DropdownMenuItem(
-        child: Text("Select A State"),
+        child: Text("Select a State"),
         value: 0,
       ),
     );
+    getStates();
   }
 
 
@@ -117,8 +118,8 @@ class _StartAppState extends State<StartApp> {
                     ),
                     child: TextButton(
                       onPressed: () async {
-                        print("find by district");
                         await getStates();
+                        print("find by district");
                         Navigator.pushNamed(
                           context,
                           DistrictScreen.id,
