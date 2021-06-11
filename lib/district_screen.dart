@@ -11,25 +11,46 @@ class DistrictScreen extends StatefulWidget {
 class _DistrictScreenState extends State<DistrictScreen> {
   String districtID;
   var dataUsingDistrict;
-  var listOfCenters;
-  var listOfStates, listOfDistricts;
+  var listOfCenters, listOfStates, listOfDistricts;
+  var selectedState, selectedDistrict;
   List<DropdownMenuItem> states, districts = List<DropdownMenuItem>();
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     print("states \n$states");
     print("districts \n$districts");
+    selectedDistrict = selectedState = 0;
+    districts.insert(
+      0,
+      DropdownMenuItem(
+        child: Text("Select A District"),
+        value: 0,
+      ),
+    );
+  }
+
+  Future<dynamic> getDistricts(var districtSelected) async {
+    Networking networking = Networking();
+    var decodeData = await networking.getDistricts(districtSelected.toString());
+    var listOfDistricts = decodeData["districts"];
+    var district;
+    for (district in listOfDistricts) {
+      districts.add(
+        DropdownMenuItem(
+          child: Text(district["district_name"]),
+          value: district["district_id"],
+        ),
+      );
+    }
+    return;
   }
 
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;
     if (arguments != null) {
-      print("states \n${arguments["states"]}");
-      print("districts \n${arguments["districts"]}");
       states = arguments["states"];
-      districts = arguments["districts"];
     }
     return Scaffold(
       appBar: AppBar(
@@ -71,25 +92,44 @@ class _DistrictScreenState extends State<DistrictScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: DropdownButton(
-                              items: states,
+                      Expanded(
+                        child: Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Center(
+                              child: DropdownButton(
+                                value: selectedState,
+                                items: arguments["states"],
+                                onChanged: (value) {
+                                  //async {
+                                  setState(() {
+                                    selectedState = value;
+                                  });
+                                  //await getDistricts(selectedState);
+                                  getDistricts(selectedState);
+                                },
+                              ),
                             ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: 100,
+                        width: 30,
                       ),
-                      Container(
-                        child: Center(
+                      Expanded(
+                        child: Container(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: DropdownButton(
-                              items: districts,
+                            padding: const EdgeInsets.all(3.0),
+                            child: Center(
+                              child: DropdownButton(
+                                value: selectedDistrict,
+                                items: arguments["districts"],
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedDistrict = value;
+                                  });
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -110,16 +150,20 @@ class _DistrictScreenState extends State<DistrictScreen> {
                 ),
                 child: TextButton(
                   onPressed: () async {
-                    Networking networking = Networking();
-                    dataUsingDistrict =
-                        await networking.getDataByDistrict(districtID);
-                    listOfCenters = dataUsingDistrict["sessions"];
-                    print(listOfCenters);
-                    Navigator.pushNamed(
-                      context,
-                      CenterListScreen.id,
-                      arguments: {'ListOfCenters': listOfCenters},
-                    );
+                    if (selectedState != 0 && selectedDistrict != 0) {
+                      Networking networking = Networking();
+                      dataUsingDistrict =
+                          await networking.getDataByDistrict(districtID);
+                      listOfCenters = dataUsingDistrict["sessions"];
+                      print(listOfCenters);
+                      Navigator.pushNamed(
+                        context,
+                        CenterListScreen.id,
+                        arguments: {'ListOfCenters': listOfCenters},
+                      );
+                    } else {
+                      print("Select valid state & district");
+                    }
                   },
                   child: Text(
                     "SEARCH",

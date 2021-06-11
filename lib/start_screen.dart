@@ -11,19 +11,11 @@ class StartApp extends StatefulWidget {
 
 class _StartAppState extends State<StartApp> {
   List<DropdownMenuItem> states = List<DropdownMenuItem>();
-  List<DropdownMenuItem> districts = List<DropdownMenuItem>();
-  var selectedState = 0, selectedDistrict = 0;
 
   Future<dynamic> getStates() async {
     Networking networking = Networking();
     var decodeData = await networking.getStates();
     var listOfStates = decodeData["states"];
-    /*states.add(
-      DropdownMenuItem(
-        child: Text("Select A State"),
-        value: 0,
-      ),
-    );*/
     var state;
     for (state in listOfStates) {
       print(state);
@@ -40,10 +32,6 @@ class _StartAppState extends State<StartApp> {
   @override
   void initState() {
     super.initState();
-    /*
-    print("states \n$states");
-    print("districts \n$districts");
-     */
     states.insert(
       0,
       DropdownMenuItem(
@@ -51,38 +39,8 @@ class _StartAppState extends State<StartApp> {
         value: 0,
       ),
     );
-    districts.insert(
-      0,
-      DropdownMenuItem(
-        child: Text("Select A District"),
-        value: 0,
-      ),
-    );
   }
 
-  Future<dynamic> getDistricts() async {
-    await getStates();
-    Networking networking = Networking();
-    selectedDistrict = 21;
-    var decodeData = await networking.getDistricts(selectedDistrict.toString());
-    var listOfDistricts = decodeData["districts"];
-    /*districts.add(
-      DropdownMenuItem(
-        child: Text("Select A District"),
-        value: 0,
-      ),
-    );*/
-    var district;
-    for (district in listOfDistricts) {
-      districts.add(
-        DropdownMenuItem(
-          child: Text(district["district_name"]),
-          value: district["district_id"],
-        ),
-      );
-    }
-    return;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -160,13 +118,12 @@ class _StartAppState extends State<StartApp> {
                     child: TextButton(
                       onPressed: () async {
                         print("find by district");
-                        await getDistricts();
+                        await getStates();
                         Navigator.pushNamed(
                           context,
                           DistrictScreen.id,
                           arguments: {
                             "states": states,
-                            "districts": districts,
                           },
                         );
                       },
