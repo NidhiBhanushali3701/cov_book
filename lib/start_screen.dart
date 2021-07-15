@@ -18,8 +18,8 @@ class _StartAppState extends State<StartApp> {
     var listOfStates = decodeData["states"];
     var state;
     for (state in listOfStates) {
-      if (states.length < 37) {
-        print(state);
+      if (states.length < 38) {
+        //print(state);
         states.add(
           DropdownMenuItem(
             child: Text(state["state_name"]),
@@ -36,15 +36,16 @@ class _StartAppState extends State<StartApp> {
   @override
   void initState() {
     super.initState();
-    /*states.insert(
+    states = [];
+    states.insert(
       0,
       DropdownMenuItem(
         child: Text("Select a State"),
         value: 0,
       ),
-    );*/
+    );
     getStates();
-    print("all states are $states ---- in start screen");
+    //print("all states are $states ---- in start screen");
   }
 
   @override

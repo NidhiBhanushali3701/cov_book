@@ -27,6 +27,15 @@ class _DistrictScreenState extends State<DistrictScreen> {
     var decodeData = await networking.getDistricts(districtSelected.toString());
     var listOfDistricts = decodeData["districts"];
     districts = [];
+    districts.insert(
+      0,
+      DropdownMenuItem(
+        child: Text(
+          "Select a District",
+        ),
+        value: 0,
+      ),
+    );
     for (var district in listOfDistricts) {
       //print("${district["district_name"]}>>${district["district_id"]}");
       districts.add(
@@ -46,10 +55,6 @@ class _DistrictScreenState extends State<DistrictScreen> {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;
     if (arguments != null) {
       states = arguments["states"];
-      for (var s in states) {
-        print(s.child);
-      }
-      print(states.length);
     }
     return ModalProgressHUD(
       inAsyncCall: showProgressBar,
@@ -85,27 +90,21 @@ class _DistrictScreenState extends State<DistrictScreen> {
                                       hint: Text("Select a State"),
                                       items: states,
                                       onChanged: (value) async {
-                                        //async {
-                                        print(
-                                            "${states[selectedState].value},#$selectedState");
+                                        selectedDistrict = 0;
+                                        //print("${states[selectedState].value},#$selectedState");
                                         setState(() {
-                                          print(
-                                              "state selected $selectedState & value $value");
+                                          //print("state selected $selectedState & value $value");
                                           selectedState = value;
-                                        });
-                                        print(
-                                            "${states[selectedState].value},#$selectedState");
-                                        setState(() {
                                           showProgressBar = true;
+                                          districts = [];
                                         });
-                                        print(
-                                            "i have selected index ${states[selectedState].child.toString()}");
+                                        //print("${states[selectedState].value},#$selectedState");
+                                        //print("i have selected index ${states[selectedState].child.toString()}");
                                         await getDistricts(selectedState);
-                                        print(
-                                            "my dis are ${districts[0].child},${districts.length}");
                                         setState(() {
                                           showProgressBar = false;
                                         });
+                                        //print("my dis are ${districts[0].child},${districts.length}");
                                       },
                                     ),
                                   ),
@@ -121,6 +120,7 @@ class _DistrictScreenState extends State<DistrictScreen> {
                                   padding: const EdgeInsets.all(3.0),
                                   child: Center(
                                     child: DropdownButton(
+                                      isExpanded: true,
                                       value: selectedDistrict,
                                       hint: Text("Select a District"),
                                       items: districts,
@@ -175,7 +175,7 @@ class _DistrictScreenState extends State<DistrictScreen> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 30,
                   ),
                 ],
               ),
