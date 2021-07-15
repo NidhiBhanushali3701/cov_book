@@ -18,13 +18,17 @@ class _StartAppState extends State<StartApp> {
     var listOfStates = decodeData["states"];
     var state;
     for (state in listOfStates) {
-      print(state);
-      states.add(
-        DropdownMenuItem(
-          child: Text(state["state_name"]),
-          value: state["state_id"],
-        ),
-      );
+      if (states.length < 37) {
+        print(state);
+        states.add(
+          DropdownMenuItem(
+            child: Text(state["state_name"]),
+            value: state["state_id"],
+          ),
+        );
+      } else {
+        break;
+      }
     }
     return;
   }
@@ -32,16 +36,16 @@ class _StartAppState extends State<StartApp> {
   @override
   void initState() {
     super.initState();
-    states.insert(
+    /*states.insert(
       0,
       DropdownMenuItem(
         child: Text("Select a State"),
         value: 0,
       ),
-    );
+    );*/
     getStates();
+    print("all states are $states ---- in start screen");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +123,7 @@ class _StartAppState extends State<StartApp> {
                     child: TextButton(
                       onPressed: () async {
                         await getStates();
-                        print("find by district");
+                        print("find by district -> states.length = ${states.length}");
                         Navigator.pushNamed(
                           context,
                           DistrictScreen.id,

@@ -57,7 +57,7 @@ class Networking {
         "https://cdn-api.co-vin.in/api/v2/admin/location/states");
     if (response.statusCode == 200) {
       decodeData = jsonDecode(response.body);
-      print(decodeData);
+      //print(decodeData);
       return decodeData;
     } else {
       print("Error!");
