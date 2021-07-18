@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class CenterListScreen extends StatefulWidget {
   static String id = "CenterListScreen";
@@ -8,6 +9,11 @@ class CenterListScreen extends StatefulWidget {
 
 class _CenterListScreenState extends State<CenterListScreen> {
   int noOfCenters = 0;
+
+  void share(var arg, int index) {
+    Share.share(
+        "${arg['ListOfCenters'][index]["vaccine"]} @ ${arg['ListOfCenters'][index]["name"]} \n${arg['ListOfCenters'][index]["address"]}");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,32 +78,37 @@ class _CenterListScreenState extends State<CenterListScreen> {
                   child: ListView.builder(
                     itemCount: noOfCenters,
                     itemBuilder: (BuildContext ctxt, int index) {
-                      return Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                '${arguments['ListOfCenters'][index]["name"]}',
-                                style: TextStyle(
-                                  fontSize: 20,
+                      return GestureDetector(
+                        onLongPress: () {
+                          share(arguments, index);
+                        },
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  '${arguments['ListOfCenters'][index]["name"]}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 27,
-                          ),
-                          Expanded(
-                            child: ListTile(
-                              title: Text(
-                                ' ${arguments['ListOfCenters'][index]["vaccine"]}',
-                                style: TextStyle(
-                                  fontSize: 20,
+                            SizedBox(
+                              width: 27,
+                            ),
+                            Expanded(
+                              child: ListTile(
+                                title: Text(
+                                  ' ${arguments['ListOfCenters'][index]["vaccine"]}',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),
