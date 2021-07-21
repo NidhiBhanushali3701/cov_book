@@ -26,6 +26,16 @@ class _CenterListScreenState extends State<CenterListScreen> {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text("CoV Book"),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.filter_alt_outlined,
+            ),
+            onPressed: () {
+              print("Apply Filters");
+            },
+          ),
+        ],
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
