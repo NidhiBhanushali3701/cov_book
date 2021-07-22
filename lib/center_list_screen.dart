@@ -93,7 +93,9 @@ class _CenterListScreenState extends State<CenterListScreen> {
                                             child: Text(
                                               "Covishield",
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: currentColor1
+                                                    ? Colors.white
+                                                    : Colors.teal,
                                                 fontSize: 15,
                                               ),
                                             ),
@@ -122,7 +124,9 @@ class _CenterListScreenState extends State<CenterListScreen> {
                                             child: Text(
                                               "Covaxin",
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: currentColor2
+                                                    ? Colors.white
+                                                    : Colors.teal,
                                                 fontSize: 15,
                                               ),
                                             ),
@@ -151,7 +155,9 @@ class _CenterListScreenState extends State<CenterListScreen> {
                                             child: Text(
                                               "Sputnik V",
                                               style: TextStyle(
-                                                color: Colors.white,
+                                                color: currentColor3
+                                                    ? Colors.white
+                                                    : Colors.teal,
                                                 fontSize: 15,
                                               ),
                                             ),
