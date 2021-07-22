@@ -170,7 +170,10 @@ class _DistrictScreenState extends State<DistrictScreen> {
                       },
                       child: Text(
                         "SEARCH",
-                        style: TextStyle(color: Colors.white, fontSize: 25),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
                       ),
                     ),
                   ),

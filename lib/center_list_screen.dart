@@ -32,7 +32,106 @@ class _CenterListScreenState extends State<CenterListScreen> {
               Icons.filter_alt_outlined,
             ),
             onPressed: () {
-              print("Apply Filters");
+              showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            "FILTERS",
+                            style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 25,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Vaccine Filter",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: FlatButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          "COVISHIELD",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: FlatButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          "COVAXIN",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.teal,
+                                        borderRadius: BorderRadius.circular(21),
+                                      ),
+                                      child: FlatButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          "SPUTNIK",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
             },
           ),
         ],
