@@ -15,7 +15,8 @@ class _CenterListScreenState extends State<CenterListScreen> {
   var args = [], arg1 = [], arg2 = [], arg3 = [];
 
   void filter(var arguments) {
-    args = arg1 = arg2 = arg3 = argument = [];
+    arg1 = arg2 = arg3 = [];
+    args = arguments['ListOfCenters'];
     for (var arg in arguments['ListOfCenters']) {
       if (arg['vaccine'] == "COVISHIELD") {
         arg1.add(arg);
@@ -263,7 +264,7 @@ class _CenterListScreenState extends State<CenterListScreen> {
               child: Center(
                 child: Container(
                   child: ListView.builder(
-                    itemCount: argument.length, //noOfCenters,
+                    itemCount: args.length, //noOfCenters,
                     itemBuilder: (BuildContext ctxt, int index) {
                       return GestureDetector(
                         onLongPress: () {
@@ -274,7 +275,7 @@ class _CenterListScreenState extends State<CenterListScreen> {
                             Expanded(
                               child: ListTile(
                                 title: Text(
-                                  '${argument[index]["name"]}', //'${arguments['ListOfCenters'][index]["name"]}',
+                                  '${args[index]["name"]}', //'${arguments['ListOfCenters'][index]["name"]}',
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),
@@ -287,7 +288,7 @@ class _CenterListScreenState extends State<CenterListScreen> {
                             Expanded(
                               child: ListTile(
                                 title: Text(
-                                  ' ${argument[index]["vaccine"]}', //' ${arguments['ListOfCenters'][index]["vaccine"]}',
+                                  ' ${args[index]["vaccine"]}', //' ${arguments['ListOfCenters'][index]["vaccine"]}',
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),
