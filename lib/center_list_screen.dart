@@ -9,6 +9,9 @@ class CenterListScreen extends StatefulWidget {
 
 class _CenterListScreenState extends State<CenterListScreen> {
   int noOfCenters = 0;
+  var currentColor1 = false,
+      currentColor2 = false,
+      currentColor3 = false; //0 - teal //1 - tealaccent
 
   void share(var arg, int index) {
     Share.share(
@@ -22,6 +25,7 @@ class _CenterListScreenState extends State<CenterListScreen> {
       noOfCenters = arguments['ListOfCenters'].length;
       print(noOfCenters);
     }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -35,101 +39,135 @@ class _CenterListScreenState extends State<CenterListScreen> {
               showModalBottomSheet(
                 context: context,
                 builder: (context) {
-                  return Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "FILTERS",
-                            style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 25,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            "Vaccine Filter",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25,
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.teal,
-                                        borderRadius: BorderRadius.circular(21),
-                                      ),
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "COVISHIELD",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.teal,
-                                        borderRadius: BorderRadius.circular(21),
-                                      ),
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "COVAXIN",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.teal,
-                                        borderRadius: BorderRadius.circular(21),
-                                      ),
-                                      child: FlatButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "SPUTNIK",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                  return StatefulBuilder(builder: (BuildContext context,
+                      StateSetter setState /*You can rename this!*/) {
+                    return Container(
+                      color: Colors.white70,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "FILTERS",
+                                style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 25,
+                                ),
                               ),
-                            ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Vaccine Filter",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25,
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: currentColor1
+                                                ? Colors.teal
+                                                : Colors.tealAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(21),
+                                          ),
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                currentColor1 = !currentColor1;
+                                              });
+                                              print("Covishield");
+                                            },
+                                            child: Text(
+                                              "Covishield",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: currentColor2
+                                                ? Colors.teal
+                                                : Colors.tealAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(21),
+                                          ),
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                currentColor2 = !currentColor2;
+                                              });
+                                              print("Covaxin");
+                                            },
+                                            child: Text(
+                                              "Covaxin",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: currentColor3
+                                                ? Colors.teal
+                                                : Colors.tealAccent,
+                                            borderRadius:
+                                                BorderRadius.circular(21),
+                                          ),
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                currentColor3 = !currentColor3;
+                                              });
+                                              print("Sputnik");
+                                            },
+                                            child: Text(
+                                              "Sputnik V",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  });
                 },
               );
             },
