@@ -46,174 +46,174 @@ class _CenterListScreenState extends State<CenterListScreen> {
       appBar: AppBar(
         backgroundColor: Colors.teal,
         title: Text("CoV Book"),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.filter_alt_outlined,
-            ),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return StatefulBuilder(builder: (BuildContext context,
-                      StateSetter setState /*You can rename this!*/) {
-                    return Container(
-                      color: Colors.white70,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Text(
-                                "FILTERS",
-                                style: TextStyle(
-                                  color: Colors.teal,
-                                  fontSize: 25,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Vaccine Filter",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 25,
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: currentFilter1
-                                                ? Colors.teal
-                                                : Colors.tealAccent,
-                                            borderRadius:
-                                                BorderRadius.circular(21),
-                                          ),
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                currentFilter1 =
-                                                    !currentFilter1;
-                                                args = arg1;
-                                              });
-                                            },
-                                            child: Text(
-                                              "Covishield",
-                                              style: TextStyle(
-                                                color: currentFilter1
-                                                    ? Colors.white
-                                                    : Colors.teal,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: currentFilter2
-                                                ? Colors.teal
-                                                : Colors.tealAccent,
-                                            borderRadius:
-                                                BorderRadius.circular(21),
-                                          ),
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                currentFilter2 =
-                                                    !currentFilter2;
-                                                args = arg2;
-                                              });
-                                            },
-                                            child: Text(
-                                              "Covaxin",
-                                              style: TextStyle(
-                                                color: currentFilter2
-                                                    ? Colors.white
-                                                    : Colors.teal,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: currentFilter3
-                                                ? Colors.teal
-                                                : Colors.tealAccent,
-                                            borderRadius:
-                                                BorderRadius.circular(21),
-                                          ),
-                                          child: FlatButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                currentFilter3 =
-                                                    !currentFilter3;
-                                                args = arg3;
-                                              });
-                                            },
-                                            child: Text(
-                                              "Sputnik V",
-                                              style: TextStyle(
-                                                color: currentFilter3
-                                                    ? Colors.white
-                                                    : Colors.teal,
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.teal,
-                                  borderRadius: BorderRadius.circular(21),
-                                ),
-                                child: IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    //setState((){});
-                                  },
-                                  icon: Icon(
-                                    Icons.find_replace_outlined,
-                                  ),
-
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  });
-                },
-              );
-            },
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: Icon(
+        //       Icons.filter_alt_outlined,
+        //     ),
+        //     onPressed: () {
+        //       showModalBottomSheet(
+        //         context: context,
+        //         builder: (context) {
+        //           return StatefulBuilder(builder: (BuildContext context,
+        //               StateSetter setState /*You can rename this!*/) {
+        //             return Container(
+        //               color: Colors.white70,
+        //               child: Container(
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.white,
+        //                   borderRadius: BorderRadius.circular(30),
+        //                 ),
+        //                 child: Padding(
+        //                   padding: const EdgeInsets.all(8.0),
+        //                   child: Column(
+        //                     children: [
+        //                       Text(
+        //                         "FILTERS",
+        //                         style: TextStyle(
+        //                           color: Colors.teal,
+        //                           fontSize: 25,
+        //                         ),
+        //                       ),
+        //                       SizedBox(
+        //                         height: 20,
+        //                       ),
+        //                       Text(
+        //                         "Vaccine Filter",
+        //                         style: TextStyle(
+        //                           color: Colors.black,
+        //                           fontSize: 25,
+        //                         ),
+        //                       ),
+        //                       Expanded(
+        //                         child: Padding(
+        //                           padding: const EdgeInsets.all(8.0),
+        //                           child: Row(
+        //                             children: [
+        //                               Expanded(
+        //                                 child: Container(
+        //                                   decoration: BoxDecoration(
+        //                                     color: currentFilter1
+        //                                         ? Colors.teal
+        //                                         : Colors.tealAccent,
+        //                                     borderRadius:
+        //                                         BorderRadius.circular(21),
+        //                                   ),
+        //                                   child: FlatButton(
+        //                                     onPressed: () {
+        //                                       setState(() {
+        //                                         currentFilter1 =
+        //                                             !currentFilter1;
+        //                                         args = arg1;
+        //                                       });
+        //                                     },
+        //                                     child: Text(
+        //                                       "Covishield",
+        //                                       style: TextStyle(
+        //                                         color: currentFilter1
+        //                                             ? Colors.white
+        //                                             : Colors.teal,
+        //                                         fontSize: 15,
+        //                                       ),
+        //                                     ),
+        //                                   ),
+        //                                 ),
+        //                               ),
+        //                               SizedBox(
+        //                                 width: 20,
+        //                               ),
+        //                               Expanded(
+        //                                 child: Container(
+        //                                   decoration: BoxDecoration(
+        //                                     color: currentFilter2
+        //                                         ? Colors.teal
+        //                                         : Colors.tealAccent,
+        //                                     borderRadius:
+        //                                         BorderRadius.circular(21),
+        //                                   ),
+        //                                   child: FlatButton(
+        //                                     onPressed: () {
+        //                                       setState(() {
+        //                                         currentFilter2 =
+        //                                             !currentFilter2;
+        //                                         args = arg2;
+        //                                       });
+        //                                     },
+        //                                     child: Text(
+        //                                       "Covaxin",
+        //                                       style: TextStyle(
+        //                                         color: currentFilter2
+        //                                             ? Colors.white
+        //                                             : Colors.teal,
+        //                                         fontSize: 15,
+        //                                       ),
+        //                                     ),
+        //                                   ),
+        //                                 ),
+        //                               ),
+        //                               SizedBox(
+        //                                 width: 20,
+        //                               ),
+        //                               Expanded(
+        //                                 child: Container(
+        //                                   decoration: BoxDecoration(
+        //                                     color: currentFilter3
+        //                                         ? Colors.teal
+        //                                         : Colors.tealAccent,
+        //                                     borderRadius:
+        //                                         BorderRadius.circular(21),
+        //                                   ),
+        //                                   child: FlatButton(
+        //                                     onPressed: () {
+        //                                       setState(() {
+        //                                         currentFilter3 =
+        //                                             !currentFilter3;
+        //                                         args = arg3;
+        //                                       });
+        //                                     },
+        //                                     child: Text(
+        //                                       "Sputnik V",
+        //                                       style: TextStyle(
+        //                                         color: currentFilter3
+        //                                             ? Colors.white
+        //                                             : Colors.teal,
+        //                                         fontSize: 15,
+        //                                       ),
+        //                                     ),
+        //                                   ),
+        //                                 ),
+        //                               ),
+        //                             ],
+        //                           ),
+        //                         ),
+        //                       ),
+        //                       Container(
+        //                         decoration: BoxDecoration(
+        //                           color: Colors.teal,
+        //                           borderRadius: BorderRadius.circular(21),
+        //                         ),
+        //                         child: IconButton(
+        //                           onPressed: () {
+        //                             Navigator.pop(context);
+        //                             //setState((){});
+        //                           },
+        //                           icon: Icon(
+        //                             Icons.find_replace_outlined,
+        //                           ),
+        //
+        //                         ),
+        //                       ),
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ),
+        //             );
+        //           });
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ],
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
